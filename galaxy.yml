@@ -1,0 +1,23 @@
+namespace: linode
+name: specdoc_example
+version: 0.0.0
+readme: README.md
+description: ansible-specdoc usage example
+authors:
+  - Lena Garber (@lbgarber)
+license_file: COPYING
+tags:
+  - ansible-specdoc
+repository: https://github.com/linode/ansible-specdoc-example
+homepage: https://github.com/linode/ansible-specdoc-example
+issues: https://github.com/linode/ansible-specdoc-example/issues
+build_ignore:
+  - '.gitignore'
+  - '.github'
+  - '.pylintrc'
+  - '*.tar.gz'
+  - 'Makefile'
+  - 'tests'
+  - 'venv'
+  - 'plugins_tmp'
+  - 'scripts'

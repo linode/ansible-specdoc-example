@@ -1,0 +1,8 @@
+*.tar.gz
+tmp
+.mypy_cache
+*.pyc
+__pycache__/
+galaxy.yml
+venv
+tests/output

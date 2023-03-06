@@ -1,0 +1,65 @@
+- name: file_basic
+  block:
+    - set_fact:
+        file_name: "/tmp/specdoc/specdoc-example-{{ 100000 | random }}.txt"
+
+    - name: Create a file
+      linode.specdoc_example.file:
+        path: "{{ file_name }}"
+        permissions: 644
+        content:
+          - line1
+          - line2
+        state: present
+      register: create_file
+
+    - assert:
+        that:
+          - create_file.file.size > 0
+          - create_file.file.permissions == "644"
+          - create_file.file.path == file_name
+          - create_file.actions[0] == "Created file {{ file_name }}"
+          - create_file.changed == True
+
+    - name: Leave the file unchanged
+      linode.specdoc_example.file:
+        path: "{{ file_name }}"
+        permissions: 644
+        content:
+          - line1
+          - line2
+        state: present
+      register: unchanged_file
+
+    - assert:
+        that:
+          - unchanged_file.changed == False
+
+    - name: Update the file contents and permissions
+      linode.specdoc_example.file:
+        path: "{{ file_name }}"
+        permissions: 777
+        content:
+          - line1
+          - line2
+          - line3
+        state: present
+      register: changed_file
+
+    - assert:
+        that:
+          - changed_file.changed == True
+          - changed_file.actions[0] == "Updated file content for {{ file_name }}"
+          - changed_file.actions[1] == "Updated file permissions 644 -> 777"
+          - changed_file.file.permissions == "777"
+          - changed_file.file.size > create_file.file.size
+  always:
+    - name: Clean up the file
+      linode.specdoc_example.file:
+        path: "{{ file_name }}"
+        state: absent
+      register: delete_file
+
+    - assert:
+        that:
+          - delete_file.changed == True
