@@ -1,4 +1,5 @@
 scripts/inject_docs.sh shebang
+scripts/clear_docs.sh shebang
 scripts/generate_sanity_ignores.py shebang
 plugins/module_utils/base_module.py import-3.8!skip
 plugins/module_utils/base_module.py import-3.9!skip
