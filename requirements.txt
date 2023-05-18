@@ -1,1 +1,1 @@
-ansible-specdoc==0.0.12
+ansible-specdoc==0.0.13

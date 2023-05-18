@@ -8,16 +8,14 @@ clean:
 	rm -f *.tar.gz
 
 build: clean
-	# Backup the original modules
-	cp -r plugins plugins_tmp
+	# Generate and inject the documentation
 	./scripts/inject_docs.sh
 
 	# Build the collection
 	-ansible-galaxy collection build
 
-	# Restore the original modules
-	rm -rf plugins
-	mv plugins_tmp plugins
+	# Remove the generated docs
+	./scripts/clear_docs.sh
 
 publish: build
 	@if test "$(GALAXY_TOKEN)" = ""; then \
@@ -35,16 +33,14 @@ deps:
 sanity:
 	python3 ./scripts/generate_sanity_ignores.py
 
-	# Backup the original modules
-	cp -r plugins plugins_tmp
+	# Generate and inject the documentation
 	./scripts/inject_docs.sh
 
 	# Run sanity tests
 	-ansible-test sanity
 
-	# Restore the original modules
-	rm -rf plugins
-	mv plugins_tmp plugins
+	# Remove the generated docs
+	./scripts/clear_docs.sh
 
 lint:
 	pylint plugins

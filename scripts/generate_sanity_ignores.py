@@ -16,6 +16,7 @@ parsed_version = version.parse(ansible_version)
 
 with open(f"tests/sanity/ignore-{parsed_version.major}.{parsed_version.minor}.txt", "w") as file:
     file.write("scripts/inject_docs.sh shebang\n")
+    file.write("scripts/clear_docs.sh shebang\n")
     file.write("scripts/generate_sanity_ignores.py shebang\n")
 
     for plugin_file in glob.glob("plugins/**/*.py", recursive=True):

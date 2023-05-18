@@ -8,11 +8,14 @@ from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
 # These will be populated at build-time
-DOCUMENTATION = """"""
+DOCUMENTATION = '''
+'''
 
-RETURN = """"""
+RETURN = '''
+'''
 
-EXAMPLES = """"""
+EXAMPLES = '''
+'''
 
 import os
 from typing import List
