@@ -9,8 +9,9 @@ import glob
 from packaging import version
 
 from ansible.release import __version__ as ansible_version
+from ansible_test._internal.constants import SUPPORTED_PYTHON_VERSIONS
 
-PYTHON_VERSIONS = ["3.8", "3.9", "3.10", "3.11"]
+PYTHON_VERSIONS = ["3.11", "3.12", "3.13", "3.14", "3.15"]
 
 parsed_version = version.parse(ansible_version)
 
@@ -21,7 +22,8 @@ with open(f"tests/sanity/ignore-{parsed_version.major}.{parsed_version.minor}.tx
 
     for plugin_file in glob.glob("plugins/**/*.py", recursive=True):
         for ver in PYTHON_VERSIONS:
-            file.write(f"{plugin_file} import-{ver}!skip\n")
+            if ver in SUPPORTED_PYTHON_VERSIONS:
+                file.write(f"{plugin_file} import-{ver}!skip\n")
 
     for plugin_file in glob.glob("plugins/modules/*.py", recursive=True):
         file.write(f"{plugin_file} validate-modules!skip\n")

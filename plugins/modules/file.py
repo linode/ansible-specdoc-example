@@ -75,7 +75,7 @@ SPECDOC_META = SpecDocMeta(
     description=[
         "Create, update, and destroy files.",
     ],
-    requirements=["Python >= 3.9"],
+    requirements=["Python >= 3.11"],
     author=["Lena Garber (@lgarber-akamai)"],
     options=SPEC,
     examples=SPEC_EXAMPLES,
